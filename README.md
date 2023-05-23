@@ -1,19 +1,19 @@
 # my-project-app
+Run the following commands inside the folder directory
 
-## Project setup
+ex. D:\Documents\projects\my-project-app
+
+### Step 1: Install the project's dependencies.
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Step 2: Start a local development server that hosts your Vue application
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Optional: for production
 ```
 npm run build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
