@@ -9,6 +9,7 @@
 
               <div class="form-inline mb-3">
                 <div class="form-group mb-2 mr-5">
+<!--                  {{ receivedValue }}-->
                   <span class="ml-4 font-weight-bold lead" style="font-size: 22px;">Users</span>
                 </div>
                 <div class="form-group ">
@@ -553,6 +554,8 @@ export default {
       newUser: {},
       userData: {},
 
+      receivedValue: '',
+
     }
 
   },
@@ -670,6 +673,22 @@ export default {
     'user'() {
       this.userData = Object.assign({}, this.user);
     },
+
+    'receivedValue'(){
+      if(this.receivedValue == true){
+        this.set_users();
+      }
+    },
+
+
+
+  },
+
+  mounted() {
+    window.Echo.channel('channel').listen('Hello', (e) => {
+      console.log(e.message);
+      this.receivedValue = e.message;
+    });
   },
 
   /**  computed  **/

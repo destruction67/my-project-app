@@ -30,6 +30,21 @@ import {AlertService} from "@/service/AlertService";
 // IDLE SESSION START
 import IdleVue from 'idle-vue';
 
+import Echo from 'laravel-echo';
+
+window.Pusher = require('pusher-js');
+
+window.Echo = new Echo({
+  broadcaster: 'pusher',
+  key: 'local',
+  wsHost: '127.0.0.1',
+  wsPort: 6001,
+  forceTLS: false,
+  disableStats: true,
+  cluster: 'mt1',
+});
+
+
 const eventsHub = new Vue();
 
 Vue.use(IdleVue, {
@@ -47,7 +62,7 @@ global.__ = __;
 
 IconConfig.config();
 
-Vue.use(require('vue-moment'));
+// Vue.use(require('vue-moment'));
 
 AppConfig.appSweetAlert2();
 AppConfig.appProgressBar();

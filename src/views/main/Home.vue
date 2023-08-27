@@ -2,7 +2,7 @@
   <div class="container bg-white" style="height: 100vh;">
 
      <span class="my-4" style="font-size: 30px">
-      <code style="color: black;"> Welcome,</code> <code> {{ authUser.username }} </code>
+      <code style="color: black;"> Welcome,</code> <code> {{ authUser.username }} {{ receivedValue }}</code>
     </span>
 
 
@@ -50,6 +50,12 @@ export default {
 
   mixins: [gateMixin],
 
+  data() {
+    return {
+      receivedValue: '',
+    };
+  },
+
   computed: {
     ...mapGetters([
       'authUser',
@@ -62,11 +68,11 @@ export default {
       'update_userUnsubscribe',
     ]),
 
-    async logout_user(){
-      if(await AlertService.questionAlertService('Are you sure you want to logout','Logout')){
-        this.logoutUser().then((r)=>{
-          if (r){
-            this.$router.push({name:'Login'});
+    async logout_user() {
+      if (await AlertService.questionAlertService('Are you sure you want to logout', 'Logout')) {
+        this.logoutUser().then((r) => {
+          if (r) {
+            this.$router.push({name: 'Login'});
           }
         });
       }
@@ -88,6 +94,13 @@ export default {
       }
     },
 
+  },
+
+  mounted() {
+    window.Echo.channel('channel').listen('Hello', (e) => {
+      console.log(e.message);
+      this.receivedValue = e.message;
+    });
   },
 
 
