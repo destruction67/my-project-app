@@ -680,8 +680,6 @@ export default {
       }
     },
 
-
-
   },
 
   mounted() {
